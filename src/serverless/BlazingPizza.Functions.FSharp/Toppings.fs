@@ -6,10 +6,17 @@ open Microsoft.Azure.WebJobs.Extensions.Http
 open Microsoft.AspNetCore.Http
 open Microsoft.Extensions.Logging
 
-open MockData
+open BlazingPizza
 
 module Toppings =
     [<FunctionName("toppings")>]
-    let run ([<HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)>] req: HttpRequest) (log: ILogger) =
+    let run
+        ([<HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)>] req: HttpRequest)
+        ([<CosmosDB("blazingPizza",
+                    "pizza",
+                    ConnectionStringSetting = "CosmosConnectionString",
+                    PartitionKey = "topping")>] toppings: Topping seq)
+        (log: ILogger)
+        =
         async { return OkObjectResult(toppings) :> IActionResult }
         |> Async.StartAsTask
