@@ -18,8 +18,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BlazingPizza.Client\BlazingPizza.Client.csproj" />
-    <ProjectReference Include="..\BlazingPizza.Shared\BlazingPizza.Shared.csproj" />
+    <ProjectReference Include="..\..\BlazingPizza.Client\BlazingPizza.Client.csproj" />
+    <ProjectReference Include="..\..\BlazingPizza.Shared\BlazingPizza.Shared.csproj" />
   </ItemGroup>
 
 </Project>
