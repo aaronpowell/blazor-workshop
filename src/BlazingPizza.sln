@@ -16,6 +16,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "serverless", "serverless", 
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "BlazingPizza.Functions.FSharp", "serverless\BlazingPizza.Functions.FSharp\BlazingPizza.Functions.FSharp.fsproj", "{F31AEF67-BF0B-4D60-8D39-4ED0AD0DE88B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazingPizza.Functions.CSharp", "serverless\BlazingPizza.Functions.CSharp\BlazingPizza.Functions.CSharp.csproj", "{1EDF4C53-6B2C-41A7-95F3-ECAF27D7C19D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -98,6 +100,18 @@ Global
 		{F31AEF67-BF0B-4D60-8D39-4ED0AD0DE88B}.Release|x64.Build.0 = Release|Any CPU
 		{F31AEF67-BF0B-4D60-8D39-4ED0AD0DE88B}.Release|x86.ActiveCfg = Release|Any CPU
 		{F31AEF67-BF0B-4D60-8D39-4ED0AD0DE88B}.Release|x86.Build.0 = Release|Any CPU
+		{1EDF4C53-6B2C-41A7-95F3-ECAF27D7C19D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1EDF4C53-6B2C-41A7-95F3-ECAF27D7C19D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1EDF4C53-6B2C-41A7-95F3-ECAF27D7C19D}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{1EDF4C53-6B2C-41A7-95F3-ECAF27D7C19D}.Debug|x64.Build.0 = Debug|Any CPU
+		{1EDF4C53-6B2C-41A7-95F3-ECAF27D7C19D}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{1EDF4C53-6B2C-41A7-95F3-ECAF27D7C19D}.Debug|x86.Build.0 = Debug|Any CPU
+		{1EDF4C53-6B2C-41A7-95F3-ECAF27D7C19D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1EDF4C53-6B2C-41A7-95F3-ECAF27D7C19D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1EDF4C53-6B2C-41A7-95F3-ECAF27D7C19D}.Release|x64.ActiveCfg = Release|Any CPU
+		{1EDF4C53-6B2C-41A7-95F3-ECAF27D7C19D}.Release|x64.Build.0 = Release|Any CPU
+		{1EDF4C53-6B2C-41A7-95F3-ECAF27D7C19D}.Release|x86.ActiveCfg = Release|Any CPU
+		{1EDF4C53-6B2C-41A7-95F3-ECAF27D7C19D}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -107,5 +121,6 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{F31AEF67-BF0B-4D60-8D39-4ED0AD0DE88B} = {7869BA90-61BD-4302-95B9-B2FA26EBF922}
+		{1EDF4C53-6B2C-41A7-95F3-ECAF27D7C19D} = {7869BA90-61BD-4302-95B9-B2FA26EBF922}
 	EndGlobalSection
 EndGlobal
