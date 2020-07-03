@@ -15,7 +15,7 @@ module Specials =
         ([<CosmosDB("blazingPizza",
                     "pizza",
                     ConnectionStringSetting = "CosmosConnectionString",
-                    PartitionKey = "specials")>] pizzas: PizzaSpecial seq)
+                    SqlQuery = "SELECT * FROM c WHERE c.partitionKey = 'specials'")>] pizzas: PizzaSpecial seq)
         (log: ILogger)
         =
         async { return OkObjectResult pizzas :> IActionResult }

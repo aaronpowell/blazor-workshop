@@ -15,7 +15,7 @@ module Toppings =
         ([<CosmosDB("blazingPizza",
                     "pizza",
                     ConnectionStringSetting = "CosmosConnectionString",
-                    PartitionKey = "topping")>] toppings: Topping seq)
+                    SqlQuery = "SELECT * FROM c WHERE c.partitionKey = 'topping'")>] toppings: Topping seq)
         (log: ILogger)
         =
         async { return OkObjectResult(toppings) :> IActionResult }
