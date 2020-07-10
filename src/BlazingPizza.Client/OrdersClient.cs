@@ -21,7 +21,7 @@ namespace BlazingPizza.Client
 
 
         public async Task<OrderWithStatus> GetOrder(int orderId) =>
-            await httpClient.GetFromJsonAsync<OrderWithStatus>($"orders/{orderId}");
+            await httpClient.GetFromJsonAsync<OrderWithStatus>($"http://localhost:7071/api/orders/{orderId}");
 
 
         public async Task<int> PlaceOrder(Order order)

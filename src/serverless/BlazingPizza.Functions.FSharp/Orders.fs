@@ -7,11 +7,12 @@ open Microsoft.AspNetCore.Http
 open Microsoft.Extensions.Logging
 
 open BlazingPizza
+open System
 
 module Orders =
     [<FunctionName("orders")>]
     let run
-        ([<HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)>] req: HttpRequest)
+        ([<HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = "orders/{orderId:int?}")>] req: HttpRequest)
         ([<CosmosDB("blazingPizza",
                     "pizza",
                     ConnectionStringSetting = "CosmosConnectionString",
@@ -25,6 +26,7 @@ module Orders =
                     ConnectionStringSetting = "CosmosConnectionString",
                     SqlQuery = "SELECT * FROM c WHERE IS_DEFINED(c.OrderId)")>] placedOrders: Order seq)
         ([<CosmosDB("blazingPizza", "pizza", ConnectionStringSetting = "CosmosConnectionString")>] newOrders: IAsyncCollector<Order>)
+        (orderId: Nullable<int>)
         (log: ILogger)
         =
         log.LogInformation("Started orders request")
@@ -32,12 +34,23 @@ module Orders =
         let result =
             match req.Method with
             | "get"
-            | "GET" ->
+            | "GET" when not orderId.HasValue ->
                 async {
                     let userOrders =
                         placedOrders
                         |> Seq.filter (fun o -> o.UserId = "Mr Awesome")
                         |> Seq.map OrderWithStatus.FromOrder
+
+                    return OkObjectResult(userOrders) :> IActionResult
+                }
+            | "get"
+            | "GET" ->
+                async {
+                    let userOrders =
+                        placedOrders
+                        |> Seq.filter (fun o -> o.OrderId = orderId.Value)
+                        |> Seq.map OrderWithStatus.FromOrder
+                        |> Seq.head
 
                     return OkObjectResult(userOrders) :> IActionResult
                 }
