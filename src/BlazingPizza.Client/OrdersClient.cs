@@ -17,7 +17,7 @@ namespace BlazingPizza.Client
         }
 
         public async Task<IEnumerable<OrderWithStatus>> GetOrders() =>
-            await httpClient.GetFromJsonAsync<IEnumerable<OrderWithStatus>>("orders");
+            await httpClient.GetFromJsonAsync<IEnumerable<OrderWithStatus>>("http://localhost:7071/api/orders");
 
 
         public async Task<OrderWithStatus> GetOrder(int orderId) =>

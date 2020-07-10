@@ -8,7 +8,7 @@ open Microsoft.Extensions.Logging
 
 open BlazingPizza
 
-module GetOrders =
+module Orders =
     [<FunctionName("orders")>]
     let run
         ([<HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)>] req: HttpRequest)
@@ -20,7 +20,11 @@ module GetOrders =
                     "pizza",
                     ConnectionStringSetting = "CosmosConnectionString",
                     SqlQuery = "SELECT * FROM c WHERE c.partitionKey = 'topping'")>] toppings: Topping seq)
-        ([<CosmosDB("blazingPizza", "pizza", ConnectionStringSetting = "CosmosConnectionString")>] orders: IAsyncCollector<Order>)
+        ([<CosmosDB("blazingPizza",
+                    "pizza",
+                    ConnectionStringSetting = "CosmosConnectionString",
+                    SqlQuery = "SELECT * FROM c WHERE IS_DEFINED(c.OrderId)")>] placedOrders: Order seq)
+        ([<CosmosDB("blazingPizza", "pizza", ConnectionStringSetting = "CosmosConnectionString")>] newOrders: IAsyncCollector<Order>)
         (log: ILogger)
         =
         log.LogInformation("Started orders request")
@@ -28,9 +32,17 @@ module GetOrders =
         let result =
             match req.Method with
             | "get"
-            | "GET" -> async { return OkResult() :> IActionResult }
+            | "GET" ->
+                async {
+                    let userOrders =
+                        placedOrders
+                        |> Seq.filter (fun o -> o.UserId = "Mr Awesome")
+                        |> Seq.map OrderWithStatus.FromOrder
+
+                    return OkObjectResult(userOrders) :> IActionResult
+                }
             | "post"
-            | "POST" -> PlaceOrder.run req pizzas toppings orders log
+            | "POST" -> PlaceOrder.run req pizzas toppings newOrders log
             | _ ->
                 async {
                     log.LogInformation
