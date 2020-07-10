@@ -25,6 +25,10 @@ module Orders =
                     "pizza",
                     ConnectionStringSetting = "CosmosConnectionString",
                     SqlQuery = "SELECT * FROM c WHERE IS_DEFINED(c.OrderId)")>] placedOrders: Order seq)
+        ([<CosmosDB("blazingPizza",
+                    "pizza",
+                    ConnectionStringSetting = "CosmosConnectionString",
+                    SqlQuery = "SELECT * FROM c WHERE c.OrderId = {orderId}")>] requestedOrder: Order seq)
         ([<CosmosDB("blazingPizza", "pizza", ConnectionStringSetting = "CosmosConnectionString")>] newOrders: IAsyncCollector<Order>)
         (orderId: Nullable<int>)
         (log: ILogger)
@@ -45,15 +49,7 @@ module Orders =
                 }
             | "get"
             | "GET" ->
-                async {
-                    let userOrders =
-                        placedOrders
-                        |> Seq.filter (fun o -> o.OrderId = orderId.Value)
-                        |> Seq.map OrderWithStatus.FromOrder
-                        |> Seq.head
-
-                    return OkObjectResult(userOrders) :> IActionResult
-                }
+                async { return OkObjectResult(OrderWithStatus.FromOrder(requestedOrder |> Seq.head)) :> IActionResult }
             | "post"
             | "POST" -> PlaceOrder.run req pizzas toppings newOrders log
             | _ ->
