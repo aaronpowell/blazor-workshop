@@ -16,6 +16,7 @@
     <Compile Include="Specials.fs" />
     <Compile Include="Toppings.fs" />
     <Compile Include="PlaceOrder.fs" />
+    <Compile Include="Orders.fs" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Sdk.Functions" Version="3.0.3" />
