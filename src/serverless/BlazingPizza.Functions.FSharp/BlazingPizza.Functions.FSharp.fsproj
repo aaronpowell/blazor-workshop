@@ -9,6 +9,9 @@
     <None Include="host.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="proxies.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="local.settings.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -16,7 +19,8 @@
     <Compile Include="Specials.fs" />
     <Compile Include="Toppings.fs" />
     <Compile Include="PlaceOrder.fs" />
-    <Compile Include="Orders.fs" />
+    <Compile Include="GetOrders.fs" />
+    <Compile Include="OrderById.fs" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Sdk.Functions" Version="3.0.3" />
