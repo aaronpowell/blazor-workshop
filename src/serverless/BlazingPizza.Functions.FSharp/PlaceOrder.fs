@@ -36,7 +36,7 @@ module PlaceOrder =
 
     [<FunctionName("place-orders")>]
     let run
-        ([<HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = null)>] req: HttpRequest)
+        ([<HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "orders")>] req: HttpRequest)
         ([<CosmosDB("blazingPizza",
                     "pizza",
                     ConnectionStringSetting = "CosmosConnectionString",

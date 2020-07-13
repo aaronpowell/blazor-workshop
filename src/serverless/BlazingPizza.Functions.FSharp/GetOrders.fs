@@ -11,7 +11,7 @@ open BlazingPizza
 module GetOrders =
     [<FunctionName("get-orders")>]
     let runGetOrders
-        ([<HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = null)>] req: HttpRequest)
+        ([<HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "orders")>] req: HttpRequest)
         ([<CosmosDB("blazingPizza",
                     "pizza",
                     ConnectionStringSetting = "CosmosConnectionString",
