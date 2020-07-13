@@ -42,7 +42,7 @@ namespace BlazingPizza.Functions.CSharp
 
         [FunctionName("orders")]
         public static async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Function, "get", Route = null)] HttpRequest req,
+            [HttpTrigger(AuthorizationLevel.Function, "post", Route = null)] HttpRequest req,
             [CosmosDB("blazingPizza",
                       "pizza",
                       ConnectionStringSetting = "CosmosConnectionString",
