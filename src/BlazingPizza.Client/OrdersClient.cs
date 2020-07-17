@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
@@ -17,16 +17,16 @@ namespace BlazingPizza.Client
         }
 
         public async Task<IEnumerable<OrderWithStatus>> GetOrders() =>
-            await httpClient.GetFromJsonAsync<IEnumerable<OrderWithStatus>>("http://localhost:7071/api/orders");
+            await httpClient.GetFromJsonAsync<IEnumerable<OrderWithStatus>>("api/orders");
 
 
         public async Task<OrderWithStatus> GetOrder(int orderId) =>
-            await httpClient.GetFromJsonAsync<OrderWithStatus>($"http://localhost:7071/api/orders/{orderId}");
+            await httpClient.GetFromJsonAsync<OrderWithStatus>($"api/orders/{orderId}");
 
 
         public async Task<int> PlaceOrder(Order order)
         {
-            var response = await httpClient.PostAsJsonAsync("http://localhost:7071/api/orders", order);
+            var response = await httpClient.PostAsJsonAsync("api/orders", order);
             response.EnsureSuccessStatusCode();
             var orderId = await response.Content.ReadFromJsonAsync<int>();
             return orderId;

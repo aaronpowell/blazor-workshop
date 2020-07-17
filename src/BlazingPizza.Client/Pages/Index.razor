@@ -1,4 +1,4 @@
-﻿@page "/"
+@page "/"
 @inject HttpClient HttpClient
 @inject OrderState OrderState
 @inject NavigationManager NavigationManager
@@ -61,7 +61,7 @@
 
     protected override async Task OnInitializedAsync()
     {
-        specials = await HttpClient.GetFromJsonAsync<List<PizzaSpecial>>("http://localhost:7071/api/specials");
+        specials = await HttpClient.GetFromJsonAsync<List<PizzaSpecial>>("api/specials");
     }
 
     async Task RemovePizza(Pizza configuredPizza)
