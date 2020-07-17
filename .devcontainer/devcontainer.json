@@ -49,5 +49,6 @@
 
   // Comment this out to connect as a root instead.
   "remoteUser": "vscode",
-  "workspaceFolder": "src"
+  "workspaceFolder": "/src",
+  "workspaceMount": "source=${localWorkspaceFolder}/src,target=/src,type=bind,consistency=delegated"
 }
