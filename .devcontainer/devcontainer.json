@@ -5,7 +5,9 @@
     "args": {
       // Update 'VARIANT' to pick a .NET Core version. Rebuild the container
       // if it already exists to update. Available variants: 2.1-bionic, 3.1-bionic
-      "VARIANT": "3.1-focal"
+      "VARIANT": "3.1-focal",
+      "INSTALL_NODE": "true",
+      "NODE_VERSION": "lts/*"
     }
   },
 
