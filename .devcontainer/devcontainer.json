@@ -48,5 +48,6 @@
   // "postCreateCommand": "dotnet restore",
 
   // Comment this out to connect as a root instead.
-  "remoteUser": "vscode"
+  "remoteUser": "vscode",
+  "workspaceFolder": "src"
 }
