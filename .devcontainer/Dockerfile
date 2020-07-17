@@ -52,12 +52,13 @@ RUN apt-get update \
         && echo "if [ \"\$(stat -c '%U' ${NVM_DIR})\" != \"${USERNAME}\" ]; then sudo chown -R ${USER_UID}:root ${NVM_DIR}; fi" \
         | tee -a /root/.bashrc /root/.zshrc /home/${USERNAME}/.bashrc >> /home/${USERNAME}/.zshrc \
         && chown ${USER_UID}:${USER_GID} /home/${USERNAME}/.bashrc /home/${USERNAME}/.zshrc \
-        && chown -R ${USER_UID}:root ${NVM_DIR} \
-        #
-        && npm install -g azure-functions-core-tools@3; \
+        && chown -R ${USER_UID}:root ${NVM_DIR}; \
     fi \
     #
     # Clean up
     && apt-get autoremove -y \
     && apt-get clean -y \
     && rm -rf /var/lib/apt/lists/*
+
+USER ${USERNAME}
+RUN npm install -g azure-functions-core-tools@3
