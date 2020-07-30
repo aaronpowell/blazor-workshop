@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Net.Http;
@@ -19,10 +20,9 @@ namespace BlazingPizza.Client
                 .AddHttpMessageHandler<BaseAddressAuthorizationMessageHandler>();
             builder.Services.AddScoped<OrderState>();
 
-            // Add auth services
-            builder.Services.AddApiAuthorization<PizzaAuthenticationState>(options =>
+            builder.Services.AddOidcAuthentication<PizzaAuthenticationState>(options =>
             {
-                options.AuthenticationPaths.LogOutSucceededPath = "";
+                builder.Configuration.Bind("OIDC", options.ProviderOptions);
             });
 
             await builder.Build().RunAsync();
@@ -32,7 +32,7 @@ namespace BlazingPizza.Client
         {
             if (baseAddress.Contains("localhost"))
             {
-                return new Uri(baseAddress);
+                return new Uri("http://localhost:7071");
             }
 
             if (baseAddress.Contains("codespaces"))
