@@ -27,7 +27,7 @@ jobs:
           dotnet-version: ${{ env.DOTNET_VERSION }}
 
       - name: Set GitHub Packages credentials
-        run: dotnet nuget update source "github.com/Azure" --username ${{ github.actor }} --password ${{ secrets.GITHUB_TOKEN }} --configfile ${{ github.workspace }}/src/nuget.config
+        run: dotnet nuget update source "github.com/Azure" --username ${{ github.actor }} --password ${{ secrets.GITHUB_TOKEN }} --configfile ${{ github.workspace }}/src/nuget.config --store-password-in-clear-text
       
       - name: Build And Deploy
         id: builddeploy
