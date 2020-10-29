@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
-using Microsoft.Extensions.Configuration;
+using Microsoft.Authentication.WebAssembly.AppService;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Net.Http;
@@ -16,14 +16,10 @@ namespace BlazingPizza.Client
             builder.RootComponents.Add<App>("app");
 
             builder.Services.AddScoped(sp => new HttpClient { BaseAddress = GetBaseAddress(builder.HostEnvironment.BaseAddress) });
-            builder.Services.AddHttpClient<OrdersClient>(client => client.BaseAddress = GetBaseAddress(builder.HostEnvironment.BaseAddress))
-                .AddHttpMessageHandler<BaseAddressAuthorizationMessageHandler>();
+            builder.Services.AddHttpClient<OrdersClient>(client => client.BaseAddress = GetBaseAddress(builder.HostEnvironment.BaseAddress));
             builder.Services.AddScoped<OrderState>();
 
-            builder.Services.AddOidcAuthentication<PizzaAuthenticationState>(options =>
-            {
-                builder.Configuration.Bind("OIDC", options.ProviderOptions);
-            });
+            builder.Services.AddStaticWebAppsAuthentication<PizzaAuthenticationState, RemoteUserAccount, EasyAuthOptions>();
 
             await builder.Build().RunAsync();
         }

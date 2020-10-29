@@ -13,6 +13,7 @@
     <PackageReference Include="Microsoft.Extensions.Http" Version="$(AspNetCoreVersion)" />
     <PackageReference Include="System.Net.Http.Json" Version="$(SystemNetHttpJsonVersion)" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="$(BlazorVersion)" />
+    <PackageReference Include="Microsoft.Authentication.WebAssembly.AppService" Version="$(AuthVersion)" />
   </ItemGroup>
 
   <ItemGroup>
