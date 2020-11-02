@@ -2,7 +2,7 @@
     <PropertyGroup>
         <AspNetCoreVersion>3.1.4</AspNetCoreVersion>
         <BlazorVersion>3.2.1</BlazorVersion>
-        <AuthVersion>0.2.1</AuthVersion>
+        <AuthVersion>0.2.2</AuthVersion>
         <EntityFrameworkVersion>3.1.4</EntityFrameworkVersion>
         <SystemNetHttpJsonVersion>3.2.0</SystemNetHttpJsonVersion>
     </PropertyGroup>
