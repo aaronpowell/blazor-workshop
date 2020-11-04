@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 
 namespace BlazingPizza.Functions.CSharp
 {
@@ -20,7 +21,10 @@ namespace BlazingPizza.Functions.CSharp
             int orderId,
             ILogger log)
         {
-            var order = requestedOrder.FirstOrDefault();
+            var principal = StaticWebAppsAuth.Parse(req);
+            var userId = principal.Claims.First(c => c.Type == ClaimTypes.NameIdentifier);
+
+            var order = requestedOrder.FirstOrDefault(order => order.UserId == userId.Value);
 
             if (order == null)
             {

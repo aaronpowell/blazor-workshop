@@ -9,6 +9,7 @@ using System.IO;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using System;
+using System.Security.Claims;
 
 namespace BlazingPizza.Functions.CSharp
 {
@@ -61,7 +62,10 @@ namespace BlazingPizza.Functions.CSharp
 
                 order.CreatedTime = DateTime.Now;
                 order.DeliveryLocation = new LatLong(51.5001, -0.1239);
-                order.UserId = "Mr Awesome";
+
+                var principal = StaticWebAppsAuth.Parse(req);
+                var userId = principal.Claims.First(c => c.Type == ClaimTypes.NameIdentifier);
+                order.UserId = userId.Value;
 
                 foreach (var pizza in order.Pizzas)
                 {
