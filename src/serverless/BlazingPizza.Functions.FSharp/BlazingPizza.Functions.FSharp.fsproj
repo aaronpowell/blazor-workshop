@@ -9,12 +9,13 @@
     <None Include="host.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="local.settings.json" Condition="Exists('local.settings.json')">
+    <None Include="local.settings.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <Compile Include="MockData.fs" />
     <Compile Include="Specials.fs" />
     <Compile Include="Toppings.fs" />
+    <Compile Include="ClientPrincipal.fs" />
     <Compile Include="PlaceOrder.fs" />
     <Compile Include="GetOrders.fs" />
     <Compile Include="OrderById.fs" />
